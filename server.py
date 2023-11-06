@@ -1,28 +1,14 @@
 import streamlit as st 
 import pickle
 
-print('Successfully executed ')
-
-model = pickle.load(open('model1.pkl', 'rb'))
+model = pickle.load(open('final_model.pkl', 'rb'))
 
 def predict_pro(list1):
     
     print("inside predict function")
     prediction=model.predict(list1)
-    
+   
     return prediction
-
-# def processing(l):
-#     # Your dictionary
-#     category_to_binary = {'Male': 1, 
-#                            'Fiber Optic': (0, 1), 'No': (0, 0)}
-
-# # Extract the tuple for 'DSL'
-# dsl_tuple = category_to_binary['DSL']
-
-# print(dsl_tuple)
-# print("Inside Processing")
-# print(l)
 
 def main():
 
@@ -137,8 +123,11 @@ def main():
         print("Printing result")
         print(result)
         
-        st.success('The output is {}'.format(result))
+        if result[0] == 0:
+                st.success('The customer will not churn!', icon="✅")
+        else:
+             st.error("the custumoer is likely to churn!")
     if st.button("About"):
-        st.text("Built with Streamlit, By Mayur Parab and Siddharth Jadhwani")
+        st.text("Built with Streamlit, Best model used: Logitic Regression")
 
 main()
